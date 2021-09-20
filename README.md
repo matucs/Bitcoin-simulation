@@ -16,4 +16,5 @@ Pull requests are welcome. For major changes, please open an issue first to disc
 Please make sure to update tests as appropriate.
 
 ## License
- 
+This sample has been created for somebody who wants to know how blockchain actually works behind the scene. 
+ Thanks to [Dr. Ehsan Malekian](https://khu.ac.ir/cv/316/)
