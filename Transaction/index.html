@@ -1,0 +1,65 @@
+<html>
+  <head>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+  </head>
+    <div class="container">
+      <a href="/">Home</a>
+      <a href="/wallet">Wallet</a>
+      <a href="/Transaction-pool">Transaction-pool</a>
+        <h1>Transaction</h1>
+        <div class="row">
+          <div class="w-50" >
+            <div class="form-group">
+              <label for="from">from</label>
+              <input
+                class="form-control"
+                id="from"
+                aria-describedby="fromHelp"
+                placeholder="Enter from wallet address"
+              />
+            </div>
+            <div class="form-group">
+              <label for="to">to</label>
+              <input class="form-control" id="to" placeholder="to" />
+            </div>
+            <div class="form-group">
+              <label for="amount">to</label>
+              <input class="form-control" id="amount" placeholder="amount" />
+            </div>
+            <button type="submit" class="btn btn-primary mt-2" onclick="createNewTransaction()">Withdraw</button>
+          </div>
+          <h2>Current Wallets</h2>
+              <div id="wallets"></div>
+      </div>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    window.onload = () => {
+      const _wallets = localStorage.getItem("wallets").split(',');
+      const wallets = document.getElementById("wallets");
+      _wallets.forEach((w) =>{
+        const p = document.createElement('p');
+        p.style.backgroundColor = "#99cf99"
+        p.innerHTML = w
+         wallets.appendChild(p);
+      })
+    }
+    function createNewTransaction() {
+      const from =document.getElementById("from").value;
+      const to =document.getElementById("to").value;
+      const amount =document.getElementById("amount").value;
+      const wallets  = localStorage.getItem("wallets");
+      $.post("http://localhost:3000/add/transaction",{from , to, amount,
+        wallets}).done((trs) => {
+           localStorage.setItem("transaction-pool", JSON.stringify(trs));
+      });
+    }
+  </script>
+</html>

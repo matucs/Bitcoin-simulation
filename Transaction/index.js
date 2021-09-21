@@ -7,7 +7,7 @@ class Transaction {
     this.from = from;
     this.to = to;
     this.amount = amount;
-    this.data = `${this.from.publicKey} ${this.to.publicKey} ${this.amount}`;
+    this.data = `${this.from} ${this.to} ${this.amount}`;
   }
 
   toString() {
@@ -19,7 +19,7 @@ class Transaction {
     return this.signature;
   }
   verify() {
-    const hash = Utitlity.SHA256(`${this.from.publicKey} ${this.to.publicKey} ${this.amount}`);
+    const hash = Utitlity.SHA256(`${this.from} ${this.to} ${this.amount}`);
     return Utitlity.verify(this.signature, hash);
   }
 }

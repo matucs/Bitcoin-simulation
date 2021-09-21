@@ -14,3 +14,5 @@ class TransactionPool {
     return transaction;
   }
 }
+
+module.exports = TransactionPool;

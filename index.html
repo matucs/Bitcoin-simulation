@@ -8,12 +8,32 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
-    <h1>BitCoin</h1>
-
-    <button class="btn btn-primary" onclick="createNewWallet()">
-      Create New Wallet
-    </button>
+  <body class="bg-secondary">
+    <div class="text-center mt-2 font-weight-bold font-italic bg-dark h-25">
+      <h2>
+        <label class="text-primary">BitCoin</label>-<label class="text-warning"
+          >Network</label
+        >-<label class="text-success">Simulation</label>
+      </h2>
+    </div>
+    <div class="row">
+      <div class="font-weight-bold font-italic bg-light">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" href="\wallet" onclick="RenderWalletPage()">Wallet</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\transaction">Transaction</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\transaction-pool">Trasnaction-pool</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\block">Block</a>
+          </li>
+        </ul>
+      </div>
+    </div>
     <div id="wallets"></div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
@@ -21,9 +41,9 @@
     function createNewWallet() {
       $.get("http://localhost:3000/add/wallet").done((wallet) => {
         const div = document.getElementById("wallets");
-          const p = document.createElement("p");
-          p.innerHTML = wallet.publicKey;
-          div.appendChild(p)
+        const p = document.createElement("p");
+        p.innerHTML = wallet.publicKey;
+        div.appendChild(p);
       });
     }
   </script>

@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <!-- CSS only -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <div class="container">
+      <a href="/">Home</a>
+      <a href="/Transaction">Transaction</a>
+      <h1>Wallet</h1>
+
+      <button class="btn btn-primary" onclick="createNewWallet()">
+        Create New Wallet
+      </button>
+      <div id="wallets" class="mt-2 h6 text-muted"></div>
+    </div>
+  </body>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script>
+    window.onload = () => {
+      const div = document.getElementById("wallets");
+      let pub_keys = localStorage.getItem("wallets").split(",");
+      pub_keys.forEach((k) => {
+        const p = document.createElement("p");
+        p.style.backgroundColor = "#dfc6f6"
+        p.innerHTML = k;
+        div.appendChild(p);
+      });
+    };
+    function createNewWallet() {
+      $.get("http://localhost:3000/add/wallet").done((wallet) => {
+        const div = document.getElementById("wallets");
+        const p = document.createElement("p");
+        p.innerHTML = wallet.publicKey;
+        div.appendChild(p);
+        const currentWallets = localStorage.getItem("wallets");
+        if (currentWallets && currentWallets.split(",").length > 0) {
+          localStorage.setItem(
+            "wallets",
+            currentWallets + "," + wallet.publicKey
+          );
+        } else {
+          localStorage.setItem("wallets", wallet.publicKey);
+        }
+      });
+    }
+  </script>
+</html>
