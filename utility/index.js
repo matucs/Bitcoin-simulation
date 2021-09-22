@@ -3,7 +3,6 @@ const SHA256 = require("sha256");
 var EC = require("elliptic").ec;
 var ec = new EC("secp256k1");
 
-let key;
 class Utility {
   constructor() {}
   static id() {
@@ -13,18 +12,17 @@ class Utility {
     return SHA256(message);
   }
   static keyPair() {
-    return this.key;
+    return ec.genKeyPair();
   }
-  static publicKey() {
-    this.key = ec.genKeyPair();
-    return this.key.getPublic().encode("hex");
+  static publicKey(keyPair) {
+    return keyPair.getPublic().encode("hex");
   }
-  static sign(message) {
-    return this.key.sign(message);
+  static sign(keyPair,message) {
+    return keyPair.sign(message);
   }
-  static verify(signature, data) {
+  static verify(publicKey,signature, data) {
     return ec
-      .keyFromPublic(this.key.getPublic(), "hex")
+      .keyFromPublic(publicKey, "hex")
       .verify(data, signature);
   }
 }

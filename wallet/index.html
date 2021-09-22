@@ -12,6 +12,8 @@
     <div class="container">
       <a href="/">Home</a>
       <a href="/Transaction">Transaction</a>
+      <a href="/mine">Mine</a>
+      <a href="/blocks">Blocks</a>
       <h1>Wallet</h1>
 
       <button class="btn btn-primary" onclick="createNewWallet()">
@@ -27,7 +29,7 @@
       let pub_keys = localStorage.getItem("wallets").split(",");
       pub_keys.forEach((k) => {
         const p = document.createElement("p");
-        p.style.backgroundColor = "#dfc6f6"
+        p.style.backgroundColor = "#dfc6f6";
         p.innerHTML = k;
         div.appendChild(p);
       });

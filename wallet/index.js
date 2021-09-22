@@ -3,8 +3,8 @@ const Utility = require("../utility");
 class Wallet {
   constructor() {
     this.id = Utility.id();
-    this.publicKey = Utility.publicKey();
     this.keyPair = Utility.keyPair();
+    this.publicKey = Utility.publicKey(this.keyPair);
     this.balance = 0;
   }
   toString() {

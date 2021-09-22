@@ -1,3 +1,4 @@
+const { sign } = require("../utility/index");
 const Utitlity = require("../utility/index");
 
 class Transaction {
@@ -7,20 +8,25 @@ class Transaction {
     this.from = from;
     this.to = to;
     this.amount = amount;
-    this.data = `${this.from} ${this.to} ${this.amount}`;
+    this.data = `${this.from} ${this.to} ${this.amount}`;   
   }
 
   toString() {
     return `time: ${this.timestamp} \n from:${this.from} \n ${this.to} \n amount: ${this.amount}`;
   }
-  sing() {
+  sign() {
     const hash = Utitlity.SHA256(this.data);
-    this.signature = Utitlity.sign(hash);
+    this.keyPair = Utitlity.keyPair();
+    this.signature = Utitlity.sign(this.keyPair, hash);
     return this.signature;
   }
   verify() {
     const hash = Utitlity.SHA256(`${this.from} ${this.to} ${this.amount}`);
-    return Utitlity.verify(this.signature, hash);
+    return Utitlity.verify(
+      Utitlity.publicKey(this.keyPair),
+      this.signature,
+      hash
+    );
   }
 }
 module.exports = Transaction;

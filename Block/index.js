@@ -18,7 +18,7 @@ class Block {
   static genesis() {
     return new this(1, "0", "0", [], 0, DIFFICULTY);
   }
-  hash(previousHash, data, nonce) {
+  static hash(previousHash, data, nonce) {
     return Utility.SHA256(`${previousHash} ${JSON.stringify(data)} ${nonce}`);
   }
   static proofOfWork(lastBlock, data) {
@@ -35,7 +35,7 @@ class Block {
       console.log(nonce);
     } while (hash.substring(0, difficulty) !== "0".repeat(difficulty));
 
-    console.log(hash);
+    return nonce;
   }
   static calculateDifficulty(difficulty, lastBlock, timestamp) {
     if (lastBlock.timestamp + MINING_RATE > timestamp) {
