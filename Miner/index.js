@@ -1,11 +1,10 @@
 const Block = require("../Block");
 const { DIFFICULTY } = require("../config");
 const Utility = require("../utility");
-const Wallet = require("../wallet");
 
 class Miner {
-  constructor() {
-    this.wallet = new Wallet();
+  constructor(walletPool) {
+    this.wallet = walletPool.Add();
   }
   static proofOfWork(lastBlock, data) {
     let nonce = 0;

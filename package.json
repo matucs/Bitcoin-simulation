@@ -4,12 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "n1": "node index http://localhost:3000 3000",
+    "n2": "node index http://localhost:3001 3001",
+    "n3": "node index http://localhost:3002 3002",
+    "n4": "node index http://localhost:3003 3003",
+    "n5": "node index http://localhost:3004 3004"
   },
   "dependencies": {
+    "axios": "^0.21.4",
     "body-parser": "^1.19.0",
     "elliptic": "^6.5.4",
     "express": "^4.17.1",
+    "request-promise": "^4.2.6",
     "sha256": "^0.2.0",
     "uuid": "^8.3.2"
   },

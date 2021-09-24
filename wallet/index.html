@@ -26,29 +26,21 @@
   <script>
     window.onload = () => {
       const div = document.getElementById("wallets");
-      let pub_keys = localStorage.getItem("wallets").split(",");
-      pub_keys.forEach((k) => {
-        const p = document.createElement("p");
-        p.style.backgroundColor = "#dfc6f6";
-        p.innerHTML = k;
-        div.appendChild(p);
+      $.get("/wallet-pool").done((ws) => {
+        ws.forEach((w) => {
+          const p = document.createElement("p");
+          p.style.backgroundColor = "#dfc6f6";
+          p.innerHTML = w.publicKey;
+          div.appendChild(p);
+        });
       });
     };
     function createNewWallet() {
-      $.get("http://localhost:3000/add/wallet").done((wallet) => {
+      $.get("/add/wallet").done((wallet) => {
         const div = document.getElementById("wallets");
         const p = document.createElement("p");
         p.innerHTML = wallet.publicKey;
         div.appendChild(p);
-        const currentWallets = localStorage.getItem("wallets");
-        if (currentWallets && currentWallets.split(",").length > 0) {
-          localStorage.setItem(
-            "wallets",
-            currentWallets + "," + wallet.publicKey
-          );
-        } else {
-          localStorage.setItem("wallets", wallet.publicKey);
-        }
       });
     }
   </script>

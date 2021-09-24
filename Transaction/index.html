@@ -31,7 +31,7 @@
               <input class="form-control" id="to" placeholder="to" />
             </div>
             <div class="form-group">
-              <label for="amount">to</label>
+              <label for="amount">amount</label>
               <input class="form-control" id="amount" placeholder="amount" />
             </div>
             <button type="submit" class="btn btn-primary mt-2" onclick="createNewTransaction()">Withdraw</button>
@@ -44,23 +44,22 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   <script>
     window.onload = () => {
-      const _wallets = localStorage.getItem("wallets").split(',');
-      const wallets = document.getElementById("wallets");
-      _wallets.forEach((w) =>{
-        const p = document.createElement('p');
-        p.style.backgroundColor = "#99cf99"
-        p.innerHTML = w
-         wallets.appendChild(p);
-      })
+      const div = document.getElementById("wallets");
+      $.get("/wallet-pool").done((ws) => {
+        ws.forEach((w) => {
+          const p = document.createElement("p");
+          p.style.backgroundColor = "#99cf99";
+          p.innerHTML = w.publicKey;
+          div.appendChild(p);
+        });
+      });
     }
     function createNewTransaction() {
       const from =document.getElementById("from").value;
       const to =document.getElementById("to").value;
       const amount =document.getElementById("amount").value;
-      const wallets  = localStorage.getItem("wallets");
-      $.post("http://localhost:3000/add/transaction",{from , to, amount,
-        wallets}).done((trs) => {
-           localStorage.setItem("transaction-pool", JSON.stringify(trs));
+      $.post("/add/transaction",{from , to, amount}).done((trs) => {
+           //localStorage.setItem("transaction-pool", JSON.stringify(trs));
       });
     }
   </script>

@@ -20,7 +20,7 @@
       <div class="font-weight-bold font-italic bg-light">
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link" href="\wallet" onclick="RenderWalletPage()">Wallet</a>
+            <a class="nav-link" href="\wallet">Wallet</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="\transaction">Transaction</a>
@@ -34,20 +34,19 @@
           <li class="nav-item">
             <a class="nav-link" href="\blocks">Block</a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\blockchain">Blockchain</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\consensus">Consensus</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="\connection">Connect to other nodes</a>
+          </li>
         </ul>
       </div>
     </div>
     <div id="wallets"></div>
   </body>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script>
-    function createNewWallet() {
-      $.get("http://localhost:3000/add/wallet").done((wallet) => {
-        const div = document.getElementById("wallets");
-        const p = document.createElement("p");
-        p.innerHTML = wallet.publicKey;
-        div.appendChild(p);
-      });
-    }
-  </script>
 </html>
