@@ -81,9 +81,8 @@ app.post("/add-nodes-url", (req, res) => {
   res.send(Bc.NodesUrl);
 });
 app.get("/consensus", (req, res) => {
-  const result = Bc.Consensus();
-  console.log("res:", result);
-  res.json({ note: result });
+  Bc.Consensus();
+  res.send(Bc);
 });
 app.get("/add/wallet", (req, res) => {
   const w1 = wp.Add();
