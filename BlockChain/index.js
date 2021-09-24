@@ -101,7 +101,6 @@ class BlockChain {
           MaxChain = [...bc.chain];
         }
       });
-      console.log(MaxChain);
       this.chain = [...MaxChain];
     });
   }

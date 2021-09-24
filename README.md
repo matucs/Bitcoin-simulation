@@ -16,12 +16,13 @@ This source simulates following parts of Bitcoin network:
 - Creation transactions from a valid wallet to another valid wallet with specified amount.
 - Creation transaction pool to let miners grab some of them to verify.
 - Creation Proof of work, to find a valid hash for miners.
-- Mine a new block and add it to blockchain.
-- Keep sync all transactions over the distributed network.
-- keep sync all created block over the distributed network.
+- Mining a new block and add it to blockchain.
+- Creation distributed blockchain network.
+- Keeping sync all transactions over the distributed network.
+- keeping sync all created block over the distributed network.
 - Consensus algorithem to verify all blockchain.
 
-![Alt text](Resources/2.PNG "")
+![Alt text](Resources/2.PNG "wallet pool-transaction pool-distributed blockchain network")
 
 ![Alt text](Resources/3.PNG "")
 
